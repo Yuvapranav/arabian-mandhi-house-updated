@@ -12,7 +12,7 @@ Zero build step. Plain HTML, CSS and vanilla JS, served straight off the filesys
 index.html          all sections
 css/styles.css      design tokens + every rule
 js/menu-data.js     menu + signature dishes (single source of truth)
-js/main.js          carousel, filtering, FAQ, mobile nav, newsletter
+js/main.js          carousel, filtering, FAQ, mobile nav, scroll spy
 images/             dish and gallery photography
 vercel.json         clean URLs + image caching
 ```
@@ -80,8 +80,7 @@ Deployed on Vercel as a static site. Pushes to `main` deploy automatically.
 ## Contact
 
 Thiruvallur St, Potheri, Kattankulathur, TN
-+91 92072 73292 · 11:00 AM – 11:00 PM, all days
-[@90sKidsMandiHouse](https://instagram.com/90sKidsMandiHouse)
++91 92072 73292 (call or WhatsApp) · 11:00 AM – 11:00 PM, all days
 
 ---
 

@@ -1,6 +1,6 @@
 /* ============================================================
    90's Kids Mandi House — behaviour
-   Nav overlay · signature carousel · menu filtering · FAQ · newsletter
+   Nav overlay · signature carousel · menu filtering · FAQ · scroll spy
    ============================================================ */
 
 (function () {
@@ -184,22 +184,8 @@
     });
   });
 
-  /* ---------------- Newsletter ---------------- */
-  const newsForm = document.getElementById("newsForm");
-  const newsMsg = document.getElementById("newsMsg");
-
-  newsForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const email = document.getElementById("newsEmail").value.trim();
-    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    newsMsg.textContent = valid
-      ? "You're in. Watch your inbox for the good stuff."
-      : "Enter a valid email address to sign up.";
-    if (valid) newsForm.reset();
-  });
-
   /* ---------------- Active nav on scroll ---------------- */
-  const sections = ["experience", "signature", "menu", "social"].map(function (id) {
+  const sections = ["experience", "signature", "menu", "faq"].map(function (id) {
     return document.getElementById(id);
   });
   const navLinks = document.querySelectorAll(".nav-desktop .nav-item");

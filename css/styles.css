@@ -575,19 +575,6 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
   margin: var(--spacing-lg) auto 0;
 }
 
-/* ---------------- Social ---------------- */
-.social-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-xl);
-}
-.social-tile img {
-  width: 100%;
-  height: 340px;
-  object-fit: cover;
-  border-radius: var(--radius-card);
-}
-
 /* ---------------- FAQ ---------------- */
 .faq-list {
   border-top: 1px solid var(--color-black);
@@ -631,7 +618,7 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  grid-template-columns: 1.6fr 1fr 1.2fr;
   gap: var(--spacing-4xl);
 }
 .footer-wordmark { display: inline-block; margin-bottom: var(--spacing-lg); }
@@ -654,34 +641,6 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
   line-height: var(--font-body-small-line-height);
 }
 .footer-list a:hover { color: var(--color-coral-orange); }
-
-.news-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-sm);
-  margin-top: var(--spacing-md);
-}
-.news-input {
-  flex: 1 1 200px;
-  padding: var(--spacing-md);
-  border: 1px solid var(--color-black);
-  border-radius: var(--radius-button);
-  background: transparent;
-  color: var(--color-deep-navy);
-  font-family: var(--font-body-small-family);
-  font-size: var(--font-body-small-size);
-  line-height: var(--font-body-small-line-height);
-}
-.news-input::placeholder { color: var(--color-deep-navy); opacity: 0.5; }
-.news-btn { flex-shrink: 0; }
-.news-msg {
-  flex: 1 1 100%;
-  min-height: var(--spacing-lg);
-  font-family: var(--font-body-small-family);
-  font-size: var(--font-body-small-size);
-  line-height: var(--font-body-small-line-height);
-  color: var(--color-dark-brown);
-}
 
 .footer-bottom {
   display: flex;
@@ -722,7 +681,6 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
   .nav-toggle { display: flex; }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-media img { height: 380px; }
-  .social-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 767px) {
@@ -753,8 +711,6 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
   .menu-card { grid-template-columns: 1fr; }
   .menu-img { height: 220px; }
   .price-value { font-size: var(--font-body-primary-size); line-height: var(--font-body-primary-line-height); }
-  .social-grid { grid-template-columns: 1fr; }
-  .social-tile img { height: 280px; }
   .footer-grid { grid-template-columns: 1fr; gap: var(--spacing-2xl); }
   .footer-bottom { margin-top: var(--spacing-4xl); }
   .reserve { padding-top: var(--spacing-6xl); padding-bottom: var(--spacing-6xl); }
