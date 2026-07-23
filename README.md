@@ -67,6 +67,35 @@ Radii are 6.4px (buttons), 8px (cards), 12px (panels), 0px (hairlines).
 Flat by design — **no shadows, no gradients, no elevation anywhere**. All
 hierarchy comes from colour contrast and the type scale.
 
+### Motion
+
+Animation uses **transform and opacity only** — nothing animates layout or
+introduces depth, so the flat design holds. Travel distances reuse the spacing
+tokens, and the 3px nav underline matches the outline-width in the design
+system's interaction evidence.
+
+- Hero content rises in on load, staggered
+- Sections, cards and FAQ rows reveal on scroll, cascading within a group
+- Stat numbers count up when they enter view, keeping the `04` padding
+- Photos scale gently inside clipped frames on hover; cards lift
+- Buttons, tabs and carousel arrows lift on hover
+- Menu cards replay their entrance on tab switch, so filtering reads as a
+  transition rather than a hard swap
+- FAQ rows animate open via `grid-template-rows`, and the `+` rotates into an `x`
+
+**Degradation is deliberate:**
+
+- Reveal styles are armed by a `.js` class set inline in `<head>`. With JS
+  off, nothing is ever hidden in the first place.
+- If `IntersectionObserver` never delivers, a 2s failsafe reveals everything —
+  the page cannot be stranded blank.
+- Stat numbers are the final values in the HTML, so they read correctly with
+  no JS at all.
+- `prefers-reduced-motion: reduce` collapses every duration and forces reveal
+  elements visible.
+- Hover lifts are switched off below 768px, where they'd otherwise stick after
+  a tap.
+
 ### Responsive
 
 Breakpoints step type down through *other token sizes* rather than arbitrary

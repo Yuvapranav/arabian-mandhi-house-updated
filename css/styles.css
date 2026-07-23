@@ -602,12 +602,27 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
   color: var(--color-coral-orange);
   flex-shrink: 0;
 }
+/* Grid-row trick: animates from a collapsed row to content height,
+   which display:none cannot do. */
+/* The bottom spacing sits on the container, not the paragraph.
+   A padded child cannot collapse inside a 0fr track — it would
+   hold the closed row open at 32px — so the padding animates
+   alongside the row instead. */
 .faq-a {
-  display: none;
-  padding-bottom: var(--spacing-xl);
+  display: grid;
+  grid-template-rows: 0fr;
   max-width: 900px;
+  padding-bottom: 0;
+  transition: grid-template-rows 0.4s ease, padding-bottom 0.4s ease;
 }
-.faq-item.is-open .faq-a { display: block; }
+.faq-a > p {
+  min-height: 0;
+  overflow: hidden;
+}
+.faq-item.is-open .faq-a {
+  grid-template-rows: 1fr;
+  padding-bottom: var(--spacing-xl);
+}
 
 /* ---------------- Footer ---------------- */
 .site-footer {
@@ -655,6 +670,146 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
 .footer-legal a { text-decoration: underline; text-underline-offset: var(--spacing-xs); }
 .footer-legal a:hover { color: var(--color-coral-orange); }
 .footer-legal .sep { padding: 0 var(--spacing-sm); color: var(--color-coral-orange); }
+
+/* ============================================================
+   MOTION
+   Transform and opacity only — nothing here animates layout,
+   colour meaning, or introduces depth. The flat design holds:
+   still no shadows, still no gradients.
+   Travel distances reuse spacing tokens; the 3px underline
+   matches the outline-width in the design system's interaction
+   evidence. Everything is disabled under prefers-reduced-motion.
+   ============================================================ */
+
+/* --- Scroll reveal ---
+   Armed only when JS is running (html.js is set by an inline
+   script in <head>), so the page still renders fully if the
+   script fails to load or is blocked. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(var(--spacing-lg));
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Hero entrance --- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(var(--spacing-xl)); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.js .hero-copy > *,
+.js .hero-media { animation: rise 0.7s ease backwards; }
+.js .hero-copy > *:nth-child(1) { animation-delay: 0.05s; }
+.js .hero-copy > *:nth-child(2) { animation-delay: 0.15s; }
+.js .hero-copy > *:nth-child(3) { animation-delay: 0.25s; }
+.js .hero-copy > *:nth-child(4) { animation-delay: 0.35s; }
+.js .hero-media { animation-delay: 0.2s; }
+
+/* --- Image frames: clip so the photo can scale inside a fixed box --- */
+.media {
+  overflow: hidden;
+  border-radius: var(--radius-card);
+}
+.exp-card .media,
+.sig-card .media { margin-bottom: var(--spacing-lg); }
+.media > img {
+  margin-bottom: 0;
+  transition: transform 0.6s ease;
+}
+.exp-card:hover .media > img,
+.sig-card:hover .media > img,
+.menu-card:hover .media > img { transform: scale(1.06); }
+
+.hero-media {
+  overflow: hidden;
+  border-radius: var(--radius-panel);
+}
+.hero-media img { transition: transform 0.8s ease; }
+.hero-media:hover img { transform: scale(1.04); }
+
+/* --- Card lift --- */
+.exp-card,
+.sig-card,
+.menu-card { transition: transform 0.35s ease; }
+.exp-card:hover,
+.sig-card:hover { transform: translateY(calc(var(--spacing-sm) * -1)); }
+.menu-card:hover { transform: translateY(calc(var(--spacing-xs) * -1)); }
+
+/* --- Buttons --- */
+.btn {
+  transition: background-color 0.25s ease, color 0.25s ease,
+              transform 0.25s ease;
+}
+.btn:hover { transform: translateY(calc(var(--spacing-xs) * -1)); }
+.btn:active { transform: translateY(0); }
+
+/* --- Nav underline --- */
+.nav-item { position: relative; }
+.nav-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: calc(var(--spacing-xs) * -1);
+  width: 100%;
+  height: 3px;
+  background: var(--color-coral-orange);
+  border-radius: var(--radius-sharp);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s ease;
+}
+.nav-item:hover::after,
+.nav-item.is-active::after { transform: scaleX(1); }
+.nav-item.is-active { color: var(--color-coral-orange); }
+
+/* --- Menu tabs and cards ---
+   Cards are re-created on every tab switch, so this keyframe
+   replays automatically as a filter transition. */
+.tab { transition: background-color 0.25s ease, color 0.25s ease,
+                   border-color 0.25s ease, transform 0.25s ease; }
+.tab:hover { transform: translateY(calc(var(--spacing-xs) * -1)); }
+.js .menu-card { animation: rise 0.45s ease backwards; }
+
+/* --- Signature carousel --- */
+.carousel-track { transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
+.car-btn { transition: background-color 0.25s ease, color 0.25s ease,
+                       transform 0.25s ease; }
+.car-btn:hover { transform: translateY(calc(var(--spacing-xs) * -1)); }
+.dot { transition: background-color 0.3s ease, opacity 0.3s ease; }
+
+/* --- FAQ --- */
+.faq-q { transition: color 0.25s ease; }
+.faq-sign {
+  display: inline-block;
+  transition: transform 0.35s ease;
+}
+/* The "+" becomes an "x" rather than swapping glyphs. */
+.faq-item.is-open .faq-sign { transform: rotate(45deg); }
+
+/* --- Stats --- */
+.stat-num { transition: color 0.3s ease; }
+
+/* --- Mobile nav overlay --- */
+.nav-overlay { animation: fade 0.25s ease; }
+.js .nav-overlay-inner > * { animation: rise 0.4s ease backwards; }
+.js .nav-overlay-inner > *:nth-child(1) { animation-delay: 0.04s; }
+.js .nav-overlay-inner > *:nth-child(2) { animation-delay: 0.08s; }
+.js .nav-overlay-inner > *:nth-child(3) { animation-delay: 0.12s; }
+.js .nav-overlay-inner > *:nth-child(4) { animation-delay: 0.16s; }
+.js .nav-overlay-inner > *:nth-child(5) { animation-delay: 0.20s; }
+.js .nav-overlay-inner > *:nth-child(6) { animation-delay: 0.24s; }
+.nav-toggle span { transition: transform 0.3s ease, opacity 0.3s ease; }
+
+/* --- Footer --- */
+.footer-list a,
+.footer-legal a { transition: color 0.25s ease; }
 
 /* ============================================================
    RESPONSIVE — tablet (>= 768px) / mobile (<= 767px)
@@ -714,4 +869,37 @@ button { font: inherit; color: inherit; border: 0; background: none; cursor: poi
   .footer-grid { grid-template-columns: 1fr; gap: var(--spacing-2xl); }
   .footer-bottom { margin-top: var(--spacing-4xl); }
   .reserve { padding-top: var(--spacing-6xl); padding-bottom: var(--spacing-6xl); }
+
+  /* Hover lifts are pointless on touch and can leave a card stuck
+     in its lifted state after a tap. */
+  .exp-card:hover,
+  .sig-card:hover,
+  .menu-card:hover,
+  .btn:hover,
+  .tab:hover,
+  .car-btn:hover { transform: none; }
+  .exp-card:hover .media > img,
+  .sig-card:hover .media > img,
+  .menu-card:hover .media > img,
+  .hero-media:hover img { transform: none; }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   Honour the OS-level setting: content still arrives, it just
+   arrives immediately. Reveal elements are forced visible so
+   nothing can be left stranded at opacity 0.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    animation-delay: 0ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; }
 }

@@ -9,6 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Anton&family=Archivo:wght@400;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/styles.css" />
+<!-- Arms the scroll-reveal styles. Without JS the class is never
+     added, so nothing is ever left hidden. -->
+<script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 
@@ -75,17 +78,17 @@
 
   <!-- Stats strip -->
   <div class="shell">
-    <ul class="stats">
+    <ul class="stats reveal">
       <li class="stat">
-        <span class="stat-num">04</span>
+        <span class="stat-num" data-count="4">04</span>
         <span class="stat-label">Signature Dishes</span>
       </li>
       <li class="stat">
-        <span class="stat-num">14</span>
+        <span class="stat-num" data-count="14">14</span>
         <span class="stat-label">Menu Creations</span>
       </li>
       <li class="stat">
-        <span class="stat-num">03</span>
+        <span class="stat-num" data-count="3">03</span>
         <span class="stat-label">Portion Sizes</span>
       </li>
     </ul>
@@ -103,7 +106,7 @@
 <!-- ============ EXPERIENCE ============ -->
 <section class="section" id="experience">
   <div class="shell">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">Charcoal <span aria-hidden="true">*</span> Craft <span aria-hidden="true">*</span> Culture</p>
       <h2 class="section-headline">THE EXPERIENCE</h2>
       <p class="body-primary section-lede">
@@ -114,8 +117,8 @@
     </div>
 
     <div class="exp-grid">
-      <article class="exp-card">
-        <img class="exp-img" src="images/gallery-spices.webp" alt="Arabian spice blend used in the marination" width="800" height="600" />
+      <article class="exp-card reveal">
+        <div class="media"><img class="exp-img" src="images/gallery-spices.webp" alt="Arabian spice blend used in the marination" width="800" height="600" /></div>
         <h3 class="card-headline">Marinated Overnight</h3>
         <p class="body-small">
           Twelve hours in a blend of Arabian spice before it ever meets flame.
@@ -123,8 +126,8 @@
         </p>
       </article>
 
-      <article class="exp-card">
-        <img class="exp-img" src="images/regular-alfaham.webp" alt="Chicken grilling over live charcoal" width="800" height="600" />
+      <article class="exp-card reveal">
+        <div class="media"><img class="exp-img" src="images/regular-alfaham.webp" alt="Chicken grilling over live charcoal" width="800" height="600" /></div>
         <h3 class="card-headline">Live Charcoal Grill</h3>
         <p class="body-small">
           No ovens pretending to be grills. Open coal, constant turning, that
@@ -132,8 +135,8 @@
         </p>
       </article>
 
-      <article class="exp-card">
-        <img class="exp-img" src="images/gallery-sides.webp" alt="Shared table of mandi, breads and sides" width="800" height="600" />
+      <article class="exp-card reveal">
+        <div class="media"><img class="exp-img" src="images/gallery-sides.webp" alt="Shared table of mandi, breads and sides" width="800" height="600" /></div>
         <h3 class="card-headline">Built For Sharing</h3>
         <p class="body-small">
           Half, Full and Family. Three portion sizes so nobody at the table has
@@ -142,7 +145,7 @@
       </article>
     </div>
 
-    <div class="info-panel">
+    <div class="info-panel reveal">
       <div class="info-block">
         <h3 class="info-title">Find Us</h3>
         <p class="body-small">Thiruvallur St, Potheri,<br />Kattankulathur, Tamil Nadu</p>
@@ -166,7 +169,7 @@
 <!-- ============ SIGNATURE CAROUSEL ============ -->
 <section class="section section-signature" id="signature">
   <div class="shell">
-    <div class="section-head signature-head">
+    <div class="section-head signature-head reveal">
       <div>
         <p class="eyebrow">Slow <span aria-hidden="true">*</span> Smoked <span aria-hidden="true">*</span> Sold Out</p>
         <h2 class="section-headline">SIGNATURE COLLECTION</h2>
@@ -188,7 +191,7 @@
 <!-- ============ MENU ============ -->
 <section class="section" id="menu">
   <div class="shell">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">Grills <span aria-hidden="true">*</span> Rice <span aria-hidden="true">*</span> Refreshers</p>
       <h2 class="section-headline">THE FULL MENU</h2>
       <p class="body-primary section-lede">
@@ -205,7 +208,7 @@
 
 <!-- ============ RESERVE BAND ============ -->
 <section class="reserve" id="reserve">
-  <div class="shell reserve-inner">
+  <div class="shell reserve-inner reveal">
     <p class="eyebrow eyebrow-on-navy">Reserve <span aria-hidden="true">*</span> Arrive <span aria-hidden="true">*</span> Feast</p>
     <h2 class="reserve-headline">BOOK A TABLE<br />IN THIRTY SECONDS</h2>
     <p class="body-primary reserve-lede">
@@ -222,37 +225,37 @@
 <!-- ============ FAQ ============ -->
 <section class="section" id="faq">
   <div class="shell">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">Asked <span aria-hidden="true">*</span> Answered <span aria-hidden="true">*</span> Sorted</p>
       <h2 class="section-headline">GOOD QUESTIONS</h2>
     </div>
 
     <div class="faq-list" id="faqList">
-      <div class="faq-item">
+      <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">
           <span>What are your opening hours?</span><span class="faq-sign" aria-hidden="true">+</span>
         </button>
         <div class="faq-a"><p class="body-small">We're open 11:00 AM to 11:00 PM, every single day of the week. Lunch, late dinner, or that 10 PM mandi craving — the grill is on.</p></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">
           <span>How do I reserve a table?</span><span class="faq-sign" aria-hidden="true">+</span>
         </button>
         <div class="faq-a"><p class="body-small">Call or WhatsApp us on <a class="inline-link" href="tel:+919207273292">+91 92072 73292</a>. Reservations are confirmed on the spot — no forms, no waiting.</p></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">
           <span>What do Half, Full and Family mean?</span><span class="faq-sign" aria-hidden="true">+</span>
         </button>
         <div class="faq-a"><p class="body-small">Three portion sizes. Half is a solid solo plate, Full comfortably feeds two, and Family is the big shareable platter built for four or more.</p></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">
           <span>Where exactly are you located?</span><span class="faq-sign" aria-hidden="true">+</span>
         </button>
         <div class="faq-a"><p class="body-small">Thiruvallur St, Potheri, Kattankulathur, Tamil Nadu — a short walk from the SRM campus gates.</p></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">
           <span>Do you cater for large groups?</span><span class="faq-sign" aria-hidden="true">+</span>
         </button>
