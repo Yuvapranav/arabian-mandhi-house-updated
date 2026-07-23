@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build / deploy
+.vercel/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.idea/
+*.swp
